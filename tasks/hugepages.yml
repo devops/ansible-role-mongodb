@@ -1,0 +1,8 @@
+---
+# tasks file for hugepages
+
+- name: Disable Transparent Huge Pages.
+  copy: src=disable-transparent-hugepages dest=/etc/init.d/disable-transparent-hugepages owner=root group=root mode=0755
+
+- name: Ensure Disable Transparent Huge Pages service is started and enabled at boot
+  service: name=disable-transparent-hugepages state=started enabled=yes

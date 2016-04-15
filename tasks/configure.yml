@@ -1,0 +1,15 @@
+---
+# tasks for mongodb Configure
+
+- name: Create the data directory for the mongodb.
+  file: path={{ mongodb_conf_dbpath }} owner={{ mongodb_user }} group={{ mongodb_user }} state=directory
+
+- name: Create the log directory for the mongodb.
+  file: path={{ mongodb_conf_logpath }} owner={{ mongodb_user }} group={{ mongodb_user }} state=directory
+
+- name: Configure mongodb.
+  template: src=mongod.conf.j2 dest=/etc/mongod.conf owner=root group=root mode=0644
+  notify: mongodb restart
+
+- name: Ensure mongodb service is started and enabled at boot.
+  service: name={{ mongodb_daemon_name}} state=started enabled=yes

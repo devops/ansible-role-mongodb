@@ -1,0 +1,8 @@
+---
+# test file
+
+- name: Install MongoDB.
+  hosts: servers
+  roles:
+    - role: ansible-role-mongodb
+      mongodb_conf_dbpath: /data/mongodb
